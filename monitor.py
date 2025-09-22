@@ -324,15 +324,42 @@ class ErrorMonitor(MonitoringSystem):
             return []
     
     def get_all_sites_recent_errors(self, hours: int = 24, limit: int = 5) -> Dict[str, List[Dict]]:
-        """Get recent errors for all active sites"""
-        all_errors = {}
-        
-        for site_code in self.get_active_sites():
-            errors = self.get_recent_errors_for_site(site_code, hours, limit)
-            if errors:
-                all_errors[site_code] = errors
-        
-        return all_errors
+        """Get recent errors for all sites (not just active ones)"""
+        try:
+            current_time = datetime.now(timezone.utc)
+            cutoff_time = current_time - timedelta(hours=hours)
+            cutoff_timestamp = cutoff_time.isoformat()
+
+            logger.info(f"Scanning for all errors since {cutoff_timestamp}")
+
+            # Scan the entire error table for recent errors
+            response = self.error_table.scan(
+                FilterExpression=Attr('timestamp').gte(cutoff_timestamp),
+                Limit=200  # Reasonable limit to avoid timeout
+            )
+
+            errors = response.get('Items', [])
+            logger.info(f"Found {len(errors)} total errors across all sites")
+
+            # Group errors by site
+            all_errors = {}
+            for error in errors:
+                site_name = error.get('site_name')
+                if site_name:
+                    if site_name not in all_errors:
+                        all_errors[site_name] = []
+                    all_errors[site_name].append(error)
+
+            # Sort and limit errors per site
+            for site_name in all_errors:
+                all_errors[site_name].sort(key=lambda x: x.get('timestamp', ''), reverse=True)
+                all_errors[site_name] = all_errors[site_name][:limit]
+
+            return all_errors
+
+        except Exception as e:
+            logger.error(f"Error scanning for all recent errors: {e}")
+            return {}
 
 
 class EmailService:
@@ -439,8 +466,7 @@ class EmailService:
                 for i, error in enumerate(errors, 1):
                     error_time = monitoring_system.format_timestamp_for_display(error.get('timestamp', ''))
                     error_msg = error.get('message', 'No message')
-                    error_version = error.get('version', 'unknown')
-                    text_content += f"{i}. [{error_time}] [v{error_version}] {error_msg}\n"
+                    text_content += f"{i}. [{error_time}] {error_msg}\n"
                 
                 text_content += "\n"
         
@@ -463,20 +489,18 @@ class EmailService:
                     <h4 style="color: #CC0000;">{site_name} ({site_code}) - {len(errors)} Error(s)</h4>
                     <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; margin-bottom: 20px; width: 100%;">
                         <tr style="background-color: #f2f2f2;">
-                            <th>#</th><th>Time</th><th>Version</th><th>Error Message</th>
+                            <th>#</th><th>Time</th><th>Error Message</th>
                         </tr>
                     """
                     
                     for i, error in enumerate(errors, 1):
                         error_time = monitoring_system.format_timestamp_for_display(error.get('timestamp', ''))
                         error_msg = error.get('message', 'No message')
-                        error_version = error.get('version', 'unknown')
-                        
+
                         html_content += f"""
                         <tr>
                             <td><strong>{i}</strong></td>
                             <td>{error_time}</td>
-                            <td>v{error_version}</td>
                             <td>{error_msg}</td>
                         </tr>
                         """
