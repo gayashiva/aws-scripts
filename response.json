@@ -1,1 +1,1 @@
-{"statusCode": 200, "body": "{\"message\": \"Offline alert sent - 1 sites offline\", \"operation\": \"offline_check\", \"offline_sites\": {\"Ayee\": null}, \"recipients\": [\"bsurya@acresofice.com\"]}"}
+{"statusCode": 500, "body": "{\"error\": \"Invalid operation: invalid_op\"}"}

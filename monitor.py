@@ -22,6 +22,7 @@ IST_OFFSET = timedelta(hours=5, minutes=30)
 # Site configurations - centralized and expandable
 SITE_CONFIG = {
     'Sakti': {'name': 'Sakti', 'type': 'air', 'active': True},
+    'Igoo': {'name': 'Igoo', 'type': 'air', 'active': True},
     'Stakmo': {'name': 'Stakmo', 'type': 'air', 'active': True},
     'Skuast': {'name': 'Skuast', 'type': 'drip', 'active': True},
     # 'Surya': {'name': 'Surya AIR', 'type': 'air', 'active': True},
@@ -37,14 +38,16 @@ SITE_CONFIG = {
 TABLE_CONFIG = {
     'air': 'AIRTable',
     'drip': 'DripTable',
-    'errors': 'AIRErrors'
+    'air_errors': 'AIRErrors',
+    'drip_errors': 'DripErrors'
 }
 
 class MonitoringSystem:
     def __init__(self):
         self.air_table = dynamodb.Table(TABLE_CONFIG['air'])
         self.drip_table = dynamodb.Table(TABLE_CONFIG['drip'])
-        self.error_table = dynamodb.Table(TABLE_CONFIG['errors'])
+        self.air_error_table = dynamodb.Table(TABLE_CONFIG['air_errors'])
+        self.drip_error_table = dynamodb.Table(TABLE_CONFIG['drip_errors'])
     
     def get_active_sites(self) -> Dict[str, Dict]:
         """Get all active sites from configuration"""
@@ -55,6 +58,12 @@ class MonitoringSystem:
         site_config = SITE_CONFIG.get(site_code, {})
         site_type = site_config.get('type', 'air')
         return self.air_table if site_type == 'air' else self.drip_table
+
+    def get_error_table_for_site(self, site_code: str):
+        """Get the appropriate error table based on site type"""
+        site_config = SITE_CONFIG.get(site_code, {})
+        site_type = site_config.get('type', 'air')
+        return self.air_error_table if site_type == 'air' else self.drip_error_table
     
     def utc_to_ist(self, utc_time: datetime) -> datetime:
         """Convert UTC time to IST"""
@@ -303,22 +312,23 @@ class ErrorMonitor(MonitoringSystem):
             current_time = datetime.now(timezone.utc)
             cutoff_time = current_time - timedelta(hours=hours)
             cutoff_timestamp = cutoff_time.isoformat()
-            
+
             logger.info(f"Querying errors for site {site_code} since {cutoff_timestamp}")
-            
-            response = self.error_table.scan(
-                FilterExpression=Attr('site_name').eq(site_code) & 
+
+            error_table = self.get_error_table_for_site(site_code)
+            response = error_table.scan(
+                FilterExpression=Attr('site_name').eq(site_code) &
                                Attr('timestamp').gte(cutoff_timestamp),
                 Limit=50
             )
-            
+
             errors = response.get('Items', [])
             logger.info(f"Found {len(errors)} errors for site {site_code}")
-            
+
             # Sort by timestamp and limit results
             errors.sort(key=lambda x: x.get('timestamp', ''), reverse=True)
             return errors[:limit]
-            
+
         except Exception as e:
             logger.error(f"Error querying errors for site {site_code}: {e}")
             return []
@@ -332,28 +342,39 @@ class ErrorMonitor(MonitoringSystem):
 
             logger.info(f"Scanning for all errors since {cutoff_timestamp}")
 
-            # Scan the entire error table for recent errors
-            response = self.error_table.scan(
-                FilterExpression=Attr('timestamp').gte(cutoff_timestamp),
-                Limit=200  # Reasonable limit to avoid timeout
-            )
-
-            errors = response.get('Items', [])
-            logger.info(f"Found {len(errors)} total errors across all sites")
-
-            # Group errors by site
             all_errors = {}
-            for error in errors:
-                site_name = error.get('site_name')
-                if site_name:
-                    if site_name not in all_errors:
-                        all_errors[site_name] = []
-                    all_errors[site_name].append(error)
+
+            # Scan both AIR and Drip error tables
+            for error_table in [self.air_error_table, self.drip_error_table]:
+                try:
+                    logger.info(f"Scanning {error_table.table_name} for errors")
+                    response = error_table.scan(
+                        FilterExpression=Attr('timestamp').gte(cutoff_timestamp),
+                        Limit=200  # Reasonable limit to avoid timeout
+                    )
+
+                    errors = response.get('Items', [])
+                    logger.info(f"Found {len(errors)} errors in {error_table.table_name}")
+
+                    # Group errors by site
+                    for error in errors:
+                        site_name = error.get('site_name')
+                        if site_name:
+                            if site_name not in all_errors:
+                                all_errors[site_name] = []
+                            all_errors[site_name].append(error)
+
+                except Exception as e:
+                    logger.error(f"Error scanning {error_table.table_name}: {e}")
+                    continue
 
             # Sort and limit errors per site
             for site_name in all_errors:
                 all_errors[site_name].sort(key=lambda x: x.get('timestamp', ''), reverse=True)
                 all_errors[site_name] = all_errors[site_name][:limit]
+
+            total_errors = sum(len(errors) for errors in all_errors.values())
+            logger.info(f"Found {total_errors} total errors across all sites")
 
             return all_errors
 

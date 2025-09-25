@@ -4,7 +4,7 @@
 FUNCTION_NAME="iot-unified-monitoring"
 ROLE_NAME="iot-monitoring-lambda-role"
 REGION="us-east-1" # Change this to your preferred region
-RUNTIME="python3.9"
+RUNTIME="python3.12"
 TIMEOUT=300
 MEMORY_SIZE=256
 
