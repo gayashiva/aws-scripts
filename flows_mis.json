@@ -1,0 +1,2121 @@
+[
+    {
+        "id": "40bd995c2a0f62d4",
+        "type": "tab",
+        "label": "Drip Irrigation Dashboard",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "410f0d07b0329f69",
+        "type": "tab",
+        "label": "MIS Dashboard",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d2c2695015ae8f08",
+        "type": "tab",
+        "label": "MIS Dashboard",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "dashboard-tab",
+        "type": "ui_tab",
+        "name": "MIS Dashboard",
+        "icon": "dashboard",
+        "order": 1
+    },
+    {
+        "id": "control-group",
+        "type": "ui_group",
+        "name": "Controls",
+        "tab": "dashboard-tab",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "levels-group",
+        "type": "ui_group",
+        "name": "Levels",
+        "tab": "dashboard-tab",
+        "order": 4,
+        "width": 6
+    },
+    {
+        "id": "sensors-group",
+        "type": "ui_group",
+        "name": "Environmental Sensors",
+        "tab": "dashboard-tab",
+        "order": 3,
+        "width": 6
+    },
+    {
+        "id": "status-group",
+        "type": "ui_group",
+        "name": "System Status",
+        "tab": "dashboard-tab",
+        "order": 2,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "aws-mqtt-broker",
+        "type": "mqtt-broker",
+        "name": "AWS Mosquitto",
+        "broker": "44.194.157.172",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": "",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "5ac7200fcce40e2e",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-dark",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#0094ce",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#097479",
+                    "value": "#0094ce",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "d04fd3f6f54ba75e",
+        "type": "ui_spacer",
+        "z": "40bd995c2a0f62d4",
+        "name": "spacer",
+        "group": "status-group",
+        "order": 4,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "mqtt-data",
+        "type": "mqtt in",
+        "z": "40bd995c2a0f62d4",
+        "name": "Data Subscriber",
+        "topic": "drip/+/data",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "aws-mqtt-broker",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "parse-sensor-data"
+            ]
+        ]
+    },
+    {
+        "id": "parse-sensor-data",
+        "type": "function",
+        "z": "40bd995c2a0f62d4",
+        "name": "Parse Sensor Data",
+        "func": "try {\n    // Debug raw input\n    node.warn(\"Raw payload received: \" + JSON.stringify(msg.payload));\n\n    // Convert string payload to JSON if needed\n    let data = msg.payload;\n    if (typeof data === 'string') {\n        data = JSON.parse(data);\n    }\n\n    // Process sensor values\n    const parsed = {\n        timestamp: data.timestamp || \"N/A\",\n        counter: Number(data.counter) || 0,\n        temperature: Math.round(Number(data.temperature) * 100) / 100 || 0,\n        humidity: Math.round(Number(data.humidity) * 100) / 100 || 0,\n        voltage: Math.round(Number(data.voltage) * 100) / 100 || 0,\n        pressure: Math.round(Number(data.pressure) * 100) / 100 || 0,\n        water_temp: Math.round(Number(data.water_temp) * 100) / 100 || 0,\n        discharge: Math.round(Number(data.discharge) * 100) / 100 || 0,\n        soil: Array.isArray(data.soil) && data.soil.length > 0 ? \n        Math.min(...data.soil) :  (Number(data.soil) || 0),\n        battery: Array.isArray(data.battery) && data.battery.length > 0 ? \n        Math.min(...data.battery) : (Number(data.battery) || 0)\n    };\n\n    // Add site from topic (drip/<site>/data)\n    const topicParts = msg.topic.split('/');\n    parsed.site = topicParts[1] || \"unknown\";\n\n    // Debug parsed output\n    node.warn(\"Parsed data: \" + JSON.stringify(parsed));\n\n    // Update message payload\n    msg.payload = parsed;\n    return msg.payload;\n} catch (e) {\n    node.error(\"Parser error: \" + e.message, msg);\n    return msg.payload;\n    //return NULL;\n}\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 100,
+        "wires": [
+            [
+                "soil-processor",
+                "battery-processor",
+                "4d18e9739285a68e",
+                "b360859721989a35",
+                "7ab9d223de1b00cc",
+                "dc9343af1a8760f5",
+                "eacd5548cba9e910",
+                "1dd15fcc7f48dac8",
+                "b39a264cee68576e"
+            ]
+        ]
+    },
+    {
+        "id": "soil-processor",
+        "type": "function",
+        "z": "40bd995c2a0f62d4",
+        "name": "Soil Moisture Processor",
+        "func": "msg.payload = msg.soil;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 120,
+        "wires": [
+            [
+                "5c58f51064476a8b"
+            ]
+        ]
+    },
+    {
+        "id": "battery-processor",
+        "type": "function",
+        "z": "40bd995c2a0f62d4",
+        "name": "Battery Processor",
+        "func": "msg.payload = msg.battery;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 160,
+        "wires": [
+            [
+                "c81c8de3d6641b5e"
+            ]
+        ]
+    },
+    {
+        "id": "site-selector",
+        "type": "ui_dropdown",
+        "z": "40bd995c2a0f62d4",
+        "name": "Select Site",
+        "label": "Site:",
+        "tooltip": "",
+        "place": "Select site...",
+        "group": "control-group",
+        "order": 1,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "multiple": false,
+        "options": [
+            {
+                "label": "Test Site",
+                "value": "Test",
+                "type": "str"
+            },
+            {
+                "label": "Skuast",
+                "value": "Skuast",
+                "type": "str"
+            },
+            {
+                "label": "Site 2",
+                "value": "Site2",
+                "type": "str"
+            }
+        ],
+        "topic": "",
+        "topicType": "str",
+        "className": "",
+        "x": 150,
+        "y": 180,
+        "wires": [
+            [
+                "store-site"
+            ]
+        ]
+    },
+    {
+        "id": "store-site",
+        "type": "function",
+        "z": "40bd995c2a0f62d4",
+        "name": "Store Selected Site",
+        "func": "flow.set('selectedSite', msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fetch-button",
+        "type": "ui_button",
+        "z": "40bd995c2a0f62d4",
+        "name": "Fetch Data",
+        "group": "control-group",
+        "order": 2,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "label": "🔄 Fetch Latest Data",
+        "tooltip": "Request fresh sensor data",
+        "color": "white",
+        "bgcolor": "#2196F3",
+        "className": "",
+        "icon": "",
+        "payload": "data",
+        "payloadType": "str",
+        "topic": "drip/Test/do",
+        "topicType": "str",
+        "x": 150,
+        "y": 240,
+        "wires": [
+            [
+                "build-fetch-command"
+            ]
+        ]
+    },
+    {
+        "id": "build-fetch-command",
+        "type": "function",
+        "z": "40bd995c2a0f62d4",
+        "name": "Build Fetch Command",
+        "func": "// Get selected site from flow context (default to 'Test' if not set)\nconst selectedSite = flow.get('selectedSite') || 'Test';\nmsg.topic = `drip/${selectedSite}/do`;\nmsg.payload = 'data';\n\nnode.warn(\"Selected site: \" + selectedSite);\nnode.warn(\"Final topic: \" + msg.topic);\nnode.warn(\"Final payload: \" + msg.payload);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 300,
+        "wires": [
+            [
+                "command-publisher",
+                "ffbb06e339722da5"
+            ]
+        ]
+    },
+    {
+        "id": "command-publisher",
+        "type": "mqtt out",
+        "z": "40bd995c2a0f62d4",
+        "name": "Command Publisher",
+        "topic": "",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "aws-mqtt-broker",
+        "x": 460,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "temp-gauge",
+        "type": "ui_gauge",
+        "z": "40bd995c2a0f62d4",
+        "name": "Temperature",
+        "group": "sensors-group",
+        "order": 1,
+        "width": 6,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "°C",
+        "format": "{{value | number:1}}",
+        "min": "-10",
+        "max": "50",
+        "colors": [
+            "#2196f3",
+            "#4fc3f7",
+            "#b3e5fc"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1170,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "pressure-gauge",
+        "type": "ui_gauge",
+        "z": "40bd995c2a0f62d4",
+        "name": "Pressure",
+        "group": "sensors-group",
+        "order": 3,
+        "width": 6,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Pressure",
+        "label": "bar",
+        "format": "{{value | number:2}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#9c27b0",
+            "#ba68c8",
+            "#e1bee7"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1160,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "voltage-gauge",
+        "type": "ui_gauge",
+        "z": "40bd995c2a0f62d4",
+        "name": "System Voltage",
+        "group": "levels-group",
+        "order": 3,
+        "width": 6,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Conductor Voltage",
+        "label": "V",
+        "format": "{{value | number:1}}",
+        "min": 10,
+        "max": "14",
+        "colors": [
+            "#ff9800",
+            "#ffb74d",
+            "#ffe0b2"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1180,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "discharge-text",
+        "type": "ui_text",
+        "z": "40bd995c2a0f62d4",
+        "group": "sensors-group",
+        "order": 2,
+        "width": 6,
+        "height": 6,
+        "name": "Discharge Rate",
+        "label": "Discharge:",
+        "format": "{{msg.discharge | number:1}} L/min",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "Arial,Arial,Helvetica,sans-serif",
+        "fontSize": "25",
+        "color": "#99c1f1",
+        "x": 1180,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "status-text",
+        "type": "ui_text",
+        "z": "40bd995c2a0f62d4",
+        "group": "status-group",
+        "order": 1,
+        "width": 6,
+        "height": 2,
+        "name": "System Status",
+        "label": "Status:",
+        "format": "Last Update: {{msg.timestamp}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Arial,Arial,Helvetica,sans-serif",
+        "fontSize": "",
+        "color": "#0bcb00",
+        "x": 1180,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "ffbb06e339722da5",
+        "type": "debug",
+        "z": "40bd995c2a0f62d4",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "4d18e9739285a68e",
+        "type": "function",
+        "z": "40bd995c2a0f62d4",
+        "name": "Temperature Processor",
+        "func": "\nmsg.payload = msg.temperature;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 300,
+        "wires": [
+            [
+                "temp-gauge"
+            ]
+        ]
+    },
+    {
+        "id": "b39a264cee68576e",
+        "type": "function",
+        "z": "40bd995c2a0f62d4",
+        "name": "Counter Processor",
+        "func": "msg.payload = msg.counter;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 500,
+        "wires": [
+            [
+                "humidity-gauge"
+            ]
+        ]
+    },
+    {
+        "id": "b360859721989a35",
+        "type": "function",
+        "z": "40bd995c2a0f62d4",
+        "name": "Pressure Processor",
+        "func": "msg.payload = msg.pressure;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 380,
+        "wires": [
+            [
+                "pressure-gauge"
+            ]
+        ]
+    },
+    {
+        "id": "7ab9d223de1b00cc",
+        "type": "function",
+        "z": "40bd995c2a0f62d4",
+        "name": "Voltage Processor",
+        "func": "msg.payload = msg.voltage;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 200,
+        "wires": [
+            [
+                "voltage-gauge"
+            ]
+        ]
+    },
+    {
+        "id": "1dd15fcc7f48dac8",
+        "type": "function",
+        "z": "40bd995c2a0f62d4",
+        "name": "DISCHARGE RATE",
+        "func": "return msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 340,
+        "wires": [
+            [
+                "discharge-text"
+            ]
+        ]
+    },
+    {
+        "id": "dc9343af1a8760f5",
+        "type": "function",
+        "z": "40bd995c2a0f62d4",
+        "name": "SYSTEM STATUS",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 540,
+        "wires": [
+            [
+                "status-text"
+            ]
+        ]
+    },
+    {
+        "id": "5c58f51064476a8b",
+        "type": "ui_gauge",
+        "z": "40bd995c2a0f62d4",
+        "name": "SOIL MOISTURE",
+        "group": "levels-group",
+        "order": 1,
+        "width": 6,
+        "height": 3,
+        "gtype": "gage",
+        "title": "SOIL MOISTURE",
+        "label": "%",
+        "format": "{{value | number:1}}",
+        "min": "-0",
+        "max": "100",
+        "colors": [
+            "#b3e5fc",
+            "#4fc3f7",
+            "#2196f3"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1190,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "c81c8de3d6641b5e",
+        "type": "ui_gauge",
+        "z": "40bd995c2a0f62d4",
+        "name": "SOIL BATTERY",
+        "group": "levels-group",
+        "order": 2,
+        "width": 6,
+        "height": 3,
+        "gtype": "gage",
+        "title": "SOIL BATTERY",
+        "label": "%",
+        "format": "{{value | number:1}}",
+        "min": "-0",
+        "max": "100",
+        "colors": [
+            "#ed333b",
+            "#f8e45c",
+            "#26a269"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1180,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "eacd5548cba9e910",
+        "type": "debug",
+        "z": "40bd995c2a0f62d4",
+        "d": true,
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "humidity-gauge",
+        "type": "ui_gauge",
+        "z": "40bd995c2a0f62d4",
+        "name": "No. of Irrigations",
+        "group": "status-group",
+        "order": 2,
+        "width": 6,
+        "height": 3,
+        "gtype": "donut",
+        "title": "No. of Irrigations",
+        "label": "",
+        "format": "{{value | number:1}}",
+        "min": 0,
+        "max": 100,
+        "colors": [
+            "#4caf50",
+            "#8bc34a",
+            "#c8e6c9"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1180,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "8ac67a98dfc77eed",
+        "type": "mqtt in",
+        "z": "410f0d07b0329f69",
+        "name": "Data Subscriber",
+        "topic": "drip/+/data",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "aws-mqtt-broker",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 150,
+        "y": 80,
+        "wires": [
+            [
+                "bb367c1d9cc24f3b"
+            ]
+        ]
+    },
+    {
+        "id": "1439bf7a487deae3",
+        "type": "mqtt in",
+        "z": "410f0d07b0329f69",
+        "name": "Status Subscriber",
+        "topic": "drip/+/status",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "aws-mqtt-broker",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "0cf1c54367a17dbd"
+            ]
+        ]
+    },
+    {
+        "id": "d08dd67a8314c78e",
+        "type": "mqtt in",
+        "z": "410f0d07b0329f69",
+        "name": "Error Subscriber",
+        "topic": "drip/+/error",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "aws-mqtt-broker",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 150,
+        "y": 420,
+        "wires": [
+            [
+                "688c1628e975649a"
+            ]
+        ]
+    },
+    {
+        "id": "bb367c1d9cc24f3b",
+        "type": "function",
+        "z": "410f0d07b0329f69",
+        "name": "Parse Sensor Data",
+        "func": "try {\n    // Debug raw input\n    node.warn(\"Raw payload received: \" + JSON.stringify(msg.payload));\n\n    // Convert string payload to JSON if needed\n    let data = msg.payload;\n    if (typeof data === 'string') {\n        data = JSON.parse(data);\n    }\n\n    // Process sensor values\n    const parsed = {\n        timestamp: data.timestamp || \"N/A\",\n        counter: Number(data.counter) || 0,\n        temperature: Math.round(Number(data.temperature) * 100) / 100 || 0,\n        humidity: Math.round(Number(data.humidity) * 100) / 100 || 0,\n        voltage: Math.round(Number(data.voltage) * 100) / 100 || 0,\n        pressure: Math.round(Number(data.pressure) * 100) / 100 || 0,\n        water_temp: Math.round(Number(data.water_temp) * 100) / 100 || 0,\n        discharge: Math.round(Number(data.discharge) * 100) / 100 || 0,\n        soil: Array.isArray(data.soil) && data.soil.length > 0 ? \n        Math.min(...data.soil) :  (Number(data.soil) || 0),\n        battery: Array.isArray(data.battery) && data.battery.length > 0 ? \n        Math.min(...data.battery) : (Number(data.battery) || 0)\n    };\n\n    // Add site from topic (drip/<site>/data)\n    const topicParts = msg.topic.split('/');\n    parsed.site = topicParts[1] || \"unknown\";\n\n    // Debug parsed output\n    node.warn(\"Parsed data: \" + JSON.stringify(parsed));\n\n    // Update message payload\n    msg.payload = parsed;\n    return msg;\n} catch (e) {\n    node.error(\"Parser error: \" + e.message, msg);\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 80,
+        "wires": [
+            [
+                "02ee5011f3bcd318"
+            ]
+        ]
+    },
+    {
+        "id": "0cf1c54367a17dbd",
+        "type": "function",
+        "z": "410f0d07b0329f69",
+        "name": "Parse Status Data",
+        "func": "try {\n    // Parse JSON payload\n    let data = msg.payload;\n    if (typeof data === 'string') {\n        data = JSON.parse(data);\n    }\n\n    // Extract status information\n    const statusInfo = {\n        message: data.message || \"No message\",\n        device: data.device || \"Unknown\",\n        timestamp: data.timestamp || \"N/A\",\n        site: data.site || \"Unknown\",\n        version: data.version || \"N/A\"\n    };\n\n    // Store in flow context for display\n    flow.set('lastStatus', statusInfo);\n    \n    node.warn(\"Status received: \" + statusInfo.message);\n    \n    msg.payload = statusInfo;\n    return msg;\n} catch (e) {\n    node.error(\"Status parser error: \" + e.message, msg);\n    return null;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 380,
+        "wires": [
+            [
+                "a238c7334233a37a"
+            ]
+        ]
+    },
+    {
+        "id": "688c1628e975649a",
+        "type": "function",
+        "z": "410f0d07b0329f69",
+        "name": "Parse Error Data",
+        "func": "try {\n    // Parse JSON payload\n    let data = msg.payload;\n    if (typeof data === 'string') {\n        data = JSON.parse(data);\n    }\n\n    // Extract error information\n    const errorInfo = {\n        message: data.message || \"No error message\",\n        device: data.device || \"Unknown\",\n        timestamp: data.timestamp || \"N/A\",\n        site: data.site || \"Unknown\",\n        version: data.version || \"N/A\"\n    };\n\n    // Store in flow context for display\n    flow.set('lastError', errorInfo);\n    \n    node.warn(\"Error received: \" + errorInfo.message);\n    \n    msg.payload = errorInfo;\n    return msg;\n} catch (e) {\n    node.error(\"Error parser error: \" + e.message, msg);\n    return null;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 420,
+        "wires": [
+            [
+                "1e87849a588fcef6"
+            ]
+        ]
+    },
+    {
+        "id": "02ee5011f3bcd318",
+        "type": "function",
+        "z": "410f0d07b0329f69",
+        "name": "Route Sensor Data",
+        "func": "// Extract all sensor values from parsed data\nconst data = msg.payload;\n\n// Return array of messages for different outputs\nreturn [\n    { payload: data.temperature },     // Output 1: Temperature gauge\n    { payload: data.pressure },        // Output 2: Pressure gauge\n    { payload: data.voltage },         // Output 3: Voltage gauge\n    { payload: data.soil },            // Output 4: Soil moisture gauge\n    { payload: data.battery },         // Output 5: Battery gauge\n    { payload: data.counter },         // Output 6: Irrigation counter\n    { ...msg, discharge: data.discharge }, // Output 7: Discharge display\n    msg                                // Output 8: System status\n];",
+        "outputs": 8,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 80,
+        "wires": [
+            [
+                "fed62b3182b2929b"
+            ],
+            [
+                "e59e3908c3c55fde"
+            ],
+            [
+                "6a59a982021dae17"
+            ],
+            [
+                "a2de6dd71f65ee1d"
+            ],
+            [
+                "827f6ad1fd05651a"
+            ],
+            [
+                "2516310bd4c08e7f"
+            ],
+            [
+                "89f00c509b9a3d95"
+            ],
+            [
+                "6a28d69dab949bc2"
+            ]
+        ]
+    },
+    {
+        "id": "e28b95d1b2dc1de0",
+        "type": "ui_text_input",
+        "z": "410f0d07b0329f69",
+        "name": "Site Input",
+        "label": "Site Name:",
+        "tooltip": "Enter the site name for MQTT communication",
+        "group": "control-group",
+        "order": 1,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "",
+        "className": "",
+        "topicType": "str",
+        "x": 150,
+        "y": 180,
+        "wires": [
+            [
+                "044e6dd0408223ec"
+            ]
+        ]
+    },
+    {
+        "id": "044e6dd0408223ec",
+        "type": "function",
+        "z": "410f0d07b0329f69",
+        "name": "Store Selected Site",
+        "func": "flow.set('selectedSite', msg.payload);\nnode.warn('Site changed to: ' + msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f8f52b54775af083",
+        "type": "ui_button",
+        "z": "410f0d07b0329f69",
+        "name": "Fetch Data",
+        "group": "control-group",
+        "order": 2,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "label": "🔄 Fetch Latest Data",
+        "tooltip": "Request fresh sensor data",
+        "color": "white",
+        "bgcolor": "#2196F3",
+        "className": "",
+        "icon": "",
+        "payload": "data",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 150,
+        "y": 240,
+        "wires": [
+            [
+                "40fa6ced251522b6"
+            ]
+        ]
+    },
+    {
+        "id": "40fa6ced251522b6",
+        "type": "function",
+        "z": "410f0d07b0329f69",
+        "name": "Build Fetch Command",
+        "func": "// Get selected site from flow context (default to 'Test' if not set)\nconst selectedSite = flow.get('selectedSite') || 'Test';\nmsg.topic = `drip/${selectedSite}/do`;\nmsg.payload = 'data';\n\nnode.warn(\"Fetching data for site: \" + selectedSite);\nnode.warn(\"MQTT topic: \" + msg.topic);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 240,
+        "wires": [
+            [
+                "a7de6faf191b6c6f",
+                "58db0f367bbdea77"
+            ]
+        ]
+    },
+    {
+        "id": "a7de6faf191b6c6f",
+        "type": "mqtt out",
+        "z": "410f0d07b0329f69",
+        "name": "Command Publisher",
+        "topic": "",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "aws-mqtt-broker",
+        "x": 700,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "58db0f367bbdea77",
+        "type": "debug",
+        "z": "410f0d07b0329f69",
+        "name": "Command Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "fed62b3182b2929b",
+        "type": "ui_template",
+        "z": "410f0d07b0329f69",
+        "group": "sensors-group",
+        "name": "Temperature Display",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<div class=\"sensor-display temp\">\n  <div class=\"sensor-label\">Temperature</div>\n  <div class=\"sensor-value\">{{msg.payload | number:1}}<span class=\"unit\">°C</span></div>\n</div>\n\n<style>\n.sensor-display {\n  background: #2d3748;\n  border-radius: 8px;\n  padding: 15px 20px;\n  text-align: center;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  border-left: 4px solid #2196f3;\n  box-sizing: border-box;\n  margin: 4px;\n  min-height: 60px;\n}\n.sensor-label {\n  color: #a0aec0;\n  font-size: 12px;\n  font-weight: 500;\n  margin-bottom: 6px;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n}\n.sensor-value {\n  color: #2196f3;\n  font-size: 24px;\n  font-weight: bold;\n  line-height: 1;\n}\n.unit {\n  font-size: 16px;\n  margin-left: 4px;\n  opacity: 0.8;\n}\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1000,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e59e3908c3c55fde",
+        "type": "ui_template",
+        "z": "410f0d07b0329f69",
+        "group": "sensors-group",
+        "name": "Pressure Display",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "format": "<div class=\"sensor-display pressure\">\n  <div class=\"sensor-label\">Pressure</div>\n  <div class=\"sensor-value\">{{msg.payload | number:2}}<span class=\"unit\">m</span></div>\n</div>\n\n<style>\n.sensor-display {\n  background: #2d3748;\n  border-radius: 8px;\n  padding: 15px 20px;\n  text-align: center;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  border-left: 4px solid #9c27b0;\n  box-sizing: border-box;\n  margin: 4px;\n  min-height: 60px;\n}\n.sensor-label {\n  color: #a0aec0;\n  font-size: 12px;\n  font-weight: 500;\n  margin-bottom: 6px;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n}\n.sensor-value {\n  color: #9c27b0;\n  font-size: 24px;\n  font-weight: bold;\n  line-height: 1;\n}\n.unit {\n  font-size: 16px;\n  margin-left: 4px;\n  opacity: 0.8;\n}\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1000,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "89f00c509b9a3d95",
+        "type": "ui_template",
+        "z": "410f0d07b0329f69",
+        "group": "sensors-group",
+        "name": "Discharge Display",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "format": "<div class=\"sensor-display discharge\">\n  <div class=\"sensor-label\">Discharge Rate</div>\n  <div class=\"sensor-value\">{{msg.discharge | number:1}}<span class=\"unit\">L/min</span></div>\n</div>\n\n<style>\n.sensor-display {\n  background: #2d3748;\n  border-radius: 8px;\n  padding: 15px 20px;\n  text-align: center;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  border-left: 4px solid #99c1f1;\n  box-sizing: border-box;\n  margin: 4px;\n  min-height: 60px;\n}\n.sensor-label {\n  color: #a0aec0;\n  font-size: 12px;\n  font-weight: 500;\n  margin-bottom: 6px;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n}\n.sensor-value {\n  color: #99c1f1;\n  font-size: 24px;\n  font-weight: bold;\n  line-height: 1;\n}\n.unit {\n  font-size: 16px;\n  margin-left: 4px;\n  opacity: 0.8;\n}\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1000,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "76d81086abf5171f",
+        "type": "ui_template",
+        "z": "410f0d07b0329f69",
+        "group": "sensors-group",
+        "name": "Sensors Styling",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n.sensors-group .nr-dashboard-cardcontainer {\n  display: flex;\n  flex-direction: column;\n  align-items: stretch;\n  gap: 8px;\n  padding: 8px;\n}\n.sensors-group .nr-dashboard-template {\n  width: 100%;\n  margin: 0;\n}\n.sensor-display {\n  width: 100% !important;\n  margin: 0 !important;\n}\n</style>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1200,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6a59a982021dae17",
+        "type": "ui_gauge",
+        "z": "410f0d07b0329f69",
+        "name": "System Voltage",
+        "group": "levels-group",
+        "order": 3,
+        "width": 4,
+        "height": 3,
+        "gtype": "gage",
+        "title": "System Voltage",
+        "label": "V",
+        "format": "{{value | number:1}}",
+        "min": 10,
+        "max": "14",
+        "colors": [
+            "#ff9800",
+            "#ffb74d",
+            "#ffe0b2"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "center-gauge",
+        "x": 1000,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "a2de6dd71f65ee1d",
+        "type": "ui_gauge",
+        "z": "410f0d07b0329f69",
+        "name": "Min Soil Moisture",
+        "group": "levels-group",
+        "order": 1,
+        "width": 4,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Min Soil Moisture",
+        "label": "%",
+        "format": "{{value | number:1}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#b3e5fc",
+            "#4fc3f7",
+            "#2196f3"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "center-gauge",
+        "x": 1000,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "827f6ad1fd05651a",
+        "type": "ui_gauge",
+        "z": "410f0d07b0329f69",
+        "name": "Min Battery Level",
+        "group": "levels-group",
+        "order": 2,
+        "width": 4,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Min Battery Level",
+        "label": "%",
+        "format": "{{value | number:1}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ed333b",
+            "#f8e45c",
+            "#26a269"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "center-gauge",
+        "x": 1000,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "3400f778415622ad",
+        "type": "ui_template",
+        "z": "410f0d07b0329f69",
+        "group": "levels-group",
+        "name": "Levels Styling",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n.levels-group .nr-dashboard-cardcontainer {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 10px;\n}\n.center-gauge {\n  text-align: center;\n  margin: 0 auto;\n}\n.center-gauge .value {\n  text-align: center;\n}\n.center-gauge .title {\n  text-align: center;\n}\n</style>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1200,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2516310bd4c08e7f",
+        "type": "ui_gauge",
+        "z": "410f0d07b0329f69",
+        "name": "Irrigation Count",
+        "group": "status-group",
+        "order": 1,
+        "width": 6,
+        "height": 3,
+        "gtype": "donut",
+        "title": "Irrigation Count",
+        "label": "cycles",
+        "format": "{{value | number:0}}",
+        "min": 0,
+        "max": 100,
+        "colors": [
+            "#4caf50",
+            "#8bc34a",
+            "#c8e6c9"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1000,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "6a28d69dab949bc2",
+        "type": "ui_template",
+        "z": "410f0d07b0329f69",
+        "group": "status-group",
+        "name": "Last Update Display",
+        "order": 2,
+        "width": 6,
+        "height": 2,
+        "format": "<div class=\"status-display update\">\n  <div class=\"status-label\">Last Update</div>\n  <div class=\"status-content\">\n    <span class=\"timestamp\">{{msg.payload.timestamp}}</span>\n  </div>\n</div>\n\n<style>\n.status-display {\n  background: #2d3748;\n  border-radius: 8px;\n  padding: 15px 20px;\n  margin: 4px;\n  border-left: 4px solid #4caf50;\n  box-sizing: border-box;\n}\n.status-label {\n  color: #a0aec0;\n  font-size: 12px;\n  font-weight: 500;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n  margin-bottom: 6px;\n}\n.status-content {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.timestamp {\n  color: #4caf50;\n  font-size: 16px;\n  font-weight: 600;\n}\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1000,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a238c7334233a37a",
+        "type": "ui_template",
+        "z": "410f0d07b0329f69",
+        "group": "status-group",
+        "name": "Status Display",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "format": "<div class=\"status-display status\">\n  <div class=\"status-label\">Status</div>\n  <div class=\"status-value\">{{msg.payload.message || 'Waiting for status...'}}</div>\n</div>\n\n<style>\n.status-display {\n  background: #2d3748;\n  border-radius: 8px;\n  padding: 15px 20px;\n  margin: 4px;\n  border-left: 4px solid #4caf50;\n  box-sizing: border-box;\n}\n.status-label {\n  color: #a0aec0;\n  font-size: 12px;\n  font-weight: 500;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n  margin-bottom: 6px;\n}\n.status-value {\n  color: #4caf50;\n  font-size: 16px;\n  font-weight: 500;\n  line-height: 1.4;\n}\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 700,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1e87849a588fcef6",
+        "type": "ui_template",
+        "z": "410f0d07b0329f69",
+        "group": "status-group",
+        "name": "Error Display",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "format": "<div class=\"status-display error\">\n  <div class=\"status-label\">Error</div>\n  <div class=\"status-value error-text\">{{msg.payload.message || 'No errors'}}</div>\n</div>\n\n<style>\n.status-display {\n  background: #2d3748;\n  border-radius: 8px;\n  padding: 15px 20px;\n  margin: 4px;\n  border-left: 4px solid #f44336;\n  box-sizing: border-box;\n}\n.status-label {\n  color: #a0aec0;\n  font-size: 12px;\n  font-weight: 500;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n  margin-bottom: 6px;\n}\n.status-value {\n  font-size: 16px;\n  font-weight: 500;\n  line-height: 1.4;\n}\n.error-text {\n  color: #f44336;\n}\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 700,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3402b5caf6e5bbba",
+        "type": "mqtt in",
+        "z": "d2c2695015ae8f08",
+        "name": "Data Subscriber",
+        "topic": "drip/+/data",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "aws-mqtt-broker",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 120,
+        "y": 80,
+        "wires": [
+            [
+                "7b1cc338dea4b611"
+            ]
+        ]
+    },
+    {
+        "id": "f441839fb65677b4",
+        "type": "mqtt in",
+        "z": "d2c2695015ae8f08",
+        "name": "Status Subscriber",
+        "topic": "drip/+/status",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "aws-mqtt-broker",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 100,
+        "y": 500,
+        "wires": [
+            [
+                "a2226364669b4c10"
+            ]
+        ]
+    },
+    {
+        "id": "72783d6620f3afac",
+        "type": "mqtt in",
+        "z": "d2c2695015ae8f08",
+        "name": "Error Subscriber",
+        "topic": "drip/+/error",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "aws-mqtt-broker",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 120,
+        "y": 580,
+        "wires": [
+            [
+                "732e304f1a42b5d6"
+            ]
+        ]
+    },
+    {
+        "id": "d56a3a4b7dced063",
+        "type": "function",
+        "z": "d2c2695015ae8f08",
+        "name": "Parse Sensor Data",
+        "func": "try {\n    // Debug raw input\n    node.warn(\"Raw payload received: \" + JSON.stringify(msg.payload));\n\n    // Convert string payload to JSON if needed\n    let data = msg.payload;\n    if (typeof data === 'string') {\n        data = JSON.parse(data);\n    }\n\n    // Process sensor values\n    const parsed = {\n        timestamp: data.timestamp || \"N/A\",\n        counter: Number(data.counter) || 0,\n        temperature: Math.round(Number(data.temperature) * 100) / 100 || 0,\n        humidity: Math.round(Number(data.humidity) * 100) / 100 || 0,\n        voltage: Math.round(Number(data.voltage) * 100) / 100 || 0,\n        pressure: Math.round(Number(data.pressure) * 100) / 100 || 0,\n        water_temp: Math.round(Number(data.water_temp) * 100) / 100 || 0,\n        discharge: Math.round(Number(data.discharge) * 100) / 100 || 0,\n        soil: Array.isArray(data.soil) && data.soil.length > 0 ? \n        Math.min(...data.soil) :  (Number(data.soil) || 0),\n        battery: Array.isArray(data.battery) && data.battery.length > 0 ? \n        Math.min(...data.battery) : (Number(data.battery) || 0)\n    };\n\n    // Add site from topic (drip/<site>/data)\n    const topicParts = msg.topic.split('/');\n    parsed.site = topicParts[1] || \"unknown\";\n\n    // Debug parsed output\n    node.warn(\"Parsed data: \" + JSON.stringify(parsed));\n\n    // Update message payload\n    msg.payload = parsed;\n    return msg;\n} catch (e) {\n    node.error(\"Parser error: \" + e.message, msg);\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 80,
+        "wires": [
+            [
+                "387a52bd12d586bb"
+            ]
+        ]
+    },
+    {
+        "id": "293ee65150c0acbd",
+        "type": "function",
+        "z": "d2c2695015ae8f08",
+        "name": "Parse Status Data",
+        "func": "try {\n    // Parse JSON payload\n    let data = msg.payload;\n    if (typeof data === 'string') {\n        data = JSON.parse(data);\n    }\n\n    // Extract status information\n    const statusInfo = {\n        message: data.message || \"No message\",\n        device: data.device || \"Unknown\",\n        timestamp: data.timestamp || \"N/A\",\n        site: data.site || \"Unknown\",\n        version: data.version,\n        uptime: data.uptime\n    };\n\n    // Store in flow context for display\n    flow.set('lastStatus', statusInfo);\n    node.warn(\"Parsed data: \" + JSON.stringify(statusInfo));\n    node.warn(\"Status received: \" + statusInfo.message);\n    node.warn(\"Uptime received: \" + statusInfo.uptime);\n    \n    msg.payload = statusInfo;\n    return msg;\n} catch (e) {\n    node.error(\"Status parser error: \" + e.message, msg);\n    return null;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 500,
+        "wires": [
+            [
+                "39def078d03adf0b",
+                "e2371dd5201ee576",
+                "2c221178086356c4"
+            ]
+        ]
+    },
+    {
+        "id": "b52d1cfbb599fb28",
+        "type": "function",
+        "z": "d2c2695015ae8f08",
+        "name": "Parse Error Data",
+        "func": "try {\n    // Parse JSON payload\n    let data = msg.payload;\n    if (typeof data === 'string') {\n        data = JSON.parse(data);\n    }\n\n    // Extract error information\n    const errorInfo = {\n        message: data.message || \"No error message\",\n        device: data.device || \"Unknown\",\n        timestamp: data.timestamp || \"N/A\",\n        site: data.site || \"Unknown\",\n        version: data.version || \"N/A\"\n    };\n\n    // Store in flow context for display\n    flow.set('lastError', errorInfo);\n    \n    node.warn(\"Error received: \" + errorInfo.message);\n    \n    msg.payload = errorInfo;\n    return msg;\n} catch (e) {\n    node.error(\"Error parser error: \" + e.message, msg);\n    return null;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 580,
+        "wires": [
+            [
+                "b2061a71f4de4226"
+            ]
+        ]
+    },
+    {
+        "id": "387a52bd12d586bb",
+        "type": "function",
+        "z": "d2c2695015ae8f08",
+        "name": "Route Sensor Data",
+        "func": "// Extract all sensor values from parsed data\nconst data = msg.payload;\n\n// Return array of messages for different outputs\nreturn [\n    { payload: data.temperature },     // Output 1: Temperature gauge\n    { payload: data.pressure },        // Output 2: Pressure gauge\n    { payload: data.voltage },         // Output 3: Voltage gauge\n    { payload: data.soil },            // Output 4: Soil moisture gauge\n    { payload: data.battery },         // Output 5: Battery gauge\n    { payload: data.counter },         // Output 6: Irrigation counter\n    { ...msg, discharge: data.discharge }, // Output 7: Discharge display\n    msg                                // Output 8: System status\n];",
+        "outputs": 8,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 80,
+        "wires": [
+            [
+                "6a140405c487db01"
+            ],
+            [
+                "b1887f69e65c17a6"
+            ],
+            [
+                "74f58288555fe3b7"
+            ],
+            [
+                "60d6dfc57b0aced0"
+            ],
+            [
+                "905e1cf198c13b0b"
+            ],
+            [
+                "0f70403369497056"
+            ],
+            [
+                "4049bad34e628f95"
+            ],
+            [
+                "cfdaa17f2a91b208"
+            ]
+        ]
+    },
+    {
+        "id": "5434f5faced5b742",
+        "type": "ui_text_input",
+        "z": "d2c2695015ae8f08",
+        "name": "Site Input",
+        "label": "Site Name:",
+        "tooltip": "Enter the site name for MQTT communication",
+        "group": "control-group",
+        "order": 1,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "str",
+        "x": 150,
+        "y": 180,
+        "wires": [
+            [
+                "c9a6a58ec07fc4de"
+            ]
+        ]
+    },
+    {
+        "id": "c9a6a58ec07fc4de",
+        "type": "function",
+        "z": "d2c2695015ae8f08",
+        "name": "Store Selected Site",
+        "func": "flow.set('selectedSite', msg.payload);\nnode.warn('Site changed to: ' + msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "61411af5d45c51f4",
+        "type": "ui_button",
+        "z": "d2c2695015ae8f08",
+        "name": "Fetch Data",
+        "group": "control-group",
+        "order": 2,
+        "width": 6,
+        "height": 1,
+        "passthru": false,
+        "label": "🔄 Fetch Latest Data",
+        "tooltip": "Request fresh sensor data",
+        "color": "white",
+        "bgcolor": "#2196F3",
+        "className": "",
+        "icon": "",
+        "payload": "data",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 150,
+        "y": 240,
+        "wires": [
+            [
+                "d59550ccef1bcf5c"
+            ]
+        ]
+    },
+    {
+        "id": "b77f8b6d1a47e6c8",
+        "type": "ui_button",
+        "z": "d2c2695015ae8f08",
+        "name": "Button A - Irrigate Start/Stop",
+        "group": "control-group",
+        "order": 3,
+        "width": 3,
+        "height": 2,
+        "passthru": false,
+        "label": "A - 💧 Irrigate Start/Stop",
+        "tooltip": "Toggle irrigation system on/off",
+        "color": "white",
+        "bgcolor": "#4CAF50",
+        "className": "",
+        "icon": "",
+        "payload": "a_short",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 150,
+        "y": 300,
+        "wires": [
+            [
+                "d59550ccef1bcf5c"
+            ]
+        ]
+    },
+    {
+        "id": "5dfd8814c15f4883",
+        "type": "ui_button",
+        "z": "d2c2695015ae8f08",
+        "name": "Button B - Request Soil Readings",
+        "group": "control-group",
+        "order": 4,
+        "width": 3,
+        "height": 2,
+        "passthru": false,
+        "label": "B - 📊 Request Soil Data",
+        "tooltip": "Request current soil moisture readings",
+        "color": "white",
+        "bgcolor": "#2196F3",
+        "className": "",
+        "icon": "",
+        "payload": "b_short",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 390,
+        "y": 300,
+        "wires": [
+            [
+                "d59550ccef1bcf5c"
+            ]
+        ]
+    },
+    {
+        "id": "3a7b8c8954160491",
+        "type": "ui_button",
+        "z": "d2c2695015ae8f08",
+        "name": "Button C - Copy Data to SD",
+        "group": "control-group",
+        "order": 5,
+        "width": 3,
+        "height": 2,
+        "passthru": false,
+        "label": "C - 💾 Copy to SD",
+        "tooltip": "Copy current data to SD card storage",
+        "color": "white",
+        "bgcolor": "#FF9800",
+        "className": "",
+        "icon": "",
+        "payload": "c_short",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 150,
+        "y": 360,
+        "wires": [
+            [
+                "d59550ccef1bcf5c"
+            ]
+        ]
+    },
+    {
+        "id": "746ab282e850080a",
+        "type": "ui_button",
+        "z": "d2c2695015ae8f08",
+        "name": "Button D - Reboot",
+        "group": "control-group",
+        "order": 6,
+        "width": 3,
+        "height": 2,
+        "passthru": false,
+        "label": "D - 🔄 Reboot System",
+        "tooltip": "Restart the irrigation system",
+        "color": "white",
+        "bgcolor": "#F44336",
+        "className": "",
+        "icon": "",
+        "payload": "d_short",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 390,
+        "y": 360,
+        "wires": [
+            [
+                "d59550ccef1bcf5c"
+            ]
+        ]
+    },
+    {
+        "id": "d59550ccef1bcf5c",
+        "type": "function",
+        "z": "d2c2695015ae8f08",
+        "name": "Build Dynamic Topic",
+        "func": "// Get selected site from flow context (default to 'Test' if not set)\nconst selectedSite = flow.get('selectedSite') || 'Test';\n\nmsg.topic = `drip/${selectedSite}/do`;\n\nnode.warn(\"Command for site: \" + selectedSite);\nnode.warn(\"MQTT topic: \" + msg.topic);\nnode.warn(\"Payload: \" + msg.payload);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 420,
+        "wires": [
+            [
+                "230101b8ee2bd624"
+            ]
+        ]
+    },
+    {
+        "id": "230101b8ee2bd624",
+        "type": "mqtt out",
+        "z": "d2c2695015ae8f08",
+        "name": "Command Publisher",
+        "topic": "",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "aws-mqtt-broker",
+        "x": 700,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "6a140405c487db01",
+        "type": "ui_template",
+        "z": "d2c2695015ae8f08",
+        "group": "sensors-group",
+        "name": "Temperature Display",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "format": "<div class=\"sensor-display temp\">\n  <div class=\"sensor-label\">Temperature</div>\n  <div class=\"sensor-value\">{{msg.payload | number:1}}<span class=\"unit\">°C</span></div>\n</div>\n\n<style>\n.sensor-display {\n  background: #2d3748;\n  border-radius: 8px;\n  padding: 15px 20px;\n  text-align: center;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  border-left: 4px solid #2196f3;\n  box-sizing: border-box;\n  margin: 4px;\n  min-height: 60px;\n}\n.sensor-label {\n  color: #a0aec0;\n  font-size: 12px;\n  font-weight: 500;\n  margin-bottom: 6px;\n}\n.status-content {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.timestamp {\n  color: #4caf50;\n  font-size: 16px;\n  font-weight: 600;\n}\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1000,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b2061a71f4de4226",
+        "type": "ui_template",
+        "z": "d2c2695015ae8f08",
+        "group": "status-group",
+        "name": "Error Display",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "format": "<div class=\"status-display error\">\n  <div class=\"status-label\">Error</div>\n  <div class=\"status-value error-text\">{{msg.payload.message || 'No errors'}}</div>\n</div>\n\n<style>\n.status-display {\n  background: #2d3748;\n  border-radius: 8px;\n  padding: 15px 20px;\n  margin: 4px;\n  border-left: 4px solid #f44336;\n  box-sizing: border-box;\n}\n.status-label {\n  color: #a0aec0;\n  font-size: 12px;\n  font-weight: 500;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n  margin-bottom: 6px;\n}\n.status-value {\n  font-size: 16px;\n  font-weight: 500;\n  line-height: 1.4;\n}\n.error-text {\n  color: #f44336;\n}\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 730,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b1887f69e65c17a6",
+        "type": "ui_template",
+        "z": "d2c2695015ae8f08",
+        "group": "sensors-group",
+        "name": "Pressure Display",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "format": "<div class=\"sensor-display pressure\">\n  <div class=\"sensor-label\">Pressure</div>\n  <div class=\"sensor-value\">{{msg.payload | number:2}}<span class=\"unit\">m</span></div>\n</div>\n\n<style>\n.sensor-display {\n  background: #2d3748;\n  border-radius: 8px;\n  padding: 15px 20px;\n  text-align: center;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  border-left: 4px solid #9c27b0;\n  box-sizing: border-box;\n  margin: 4px;\n  min-height: 60px;\n}\n.sensor-label {\n  color: #a0aec0;\n  font-size: 12px;\n  font-weight: 500;\n  margin-bottom: 6px;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n}\n.sensor-value {\n  color: #9c27b0;\n  font-size: 24px;\n  font-weight: bold;\n  line-height: 1;\n}\n.unit {\n  font-size: 16px;\n  margin-left: 4px;\n  opacity: 0.8;\n}\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1000,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4049bad34e628f95",
+        "type": "ui_template",
+        "z": "d2c2695015ae8f08",
+        "group": "sensors-group",
+        "name": "Discharge Display",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "format": "<div class=\"sensor-display discharge\">\n  <div class=\"sensor-label\">Discharge Rate</div>\n  <div class=\"sensor-value\">{{msg.discharge | number:1}}<span class=\"unit\">L/min</span></div>\n</div>\n\n<style>\n.sensor-display {\n  background: #2d3748;\n  border-radius: 8px;\n  padding: 15px 20px;\n  text-align: center;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  border-left: 4px solid #99c1f1;\n  box-sizing: border-box;\n  margin: 4px;\n  min-height: 60px;\n}\n.sensor-label {\n  color: #a0aec0;\n  font-size: 12px;\n  font-weight: 500;\n  margin-bottom: 6px;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n}\n.sensor-value {\n  color: #99c1f1;\n  font-size: 24px;\n  font-weight: bold;\n  line-height: 1;\n}\n.unit {\n  font-size: 16px;\n  margin-left: 4px;\n  opacity: 0.8;\n}\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1000,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "75ab538d75f89190",
+        "type": "ui_template",
+        "z": "d2c2695015ae8f08",
+        "group": "sensors-group",
+        "name": "Sensors Styling",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n.sensors-group .nr-dashboard-cardcontainer {\n  display: flex;\n  flex-direction: column;\n  align-items: stretch;\n  gap: 8px;\n  padding: 8px;\n}\n.sensors-group .nr-dashboard-template {\n  width: 100%;\n  margin: 0;\n}\n.sensor-display {\n  width: 100% !important;\n  margin: 0 !important;\n}\n</style>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1200,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "74f58288555fe3b7",
+        "type": "ui_gauge",
+        "z": "d2c2695015ae8f08",
+        "name": "System Voltage",
+        "group": "levels-group",
+        "order": 3,
+        "width": 4,
+        "height": 3,
+        "gtype": "gage",
+        "title": "System Voltage",
+        "label": "V",
+        "format": "{{value | number:1}}",
+        "min": 10,
+        "max": "14",
+        "colors": [
+            "#ff9800",
+            "#ffb74d",
+            "#ffe0b2"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "center-gauge",
+        "x": 1000,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "60d6dfc57b0aced0",
+        "type": "ui_gauge",
+        "z": "d2c2695015ae8f08",
+        "name": "Min Soil Moisture",
+        "group": "levels-group",
+        "order": 1,
+        "width": 4,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Min Soil Moisture",
+        "label": "%",
+        "format": "{{value | number:1}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#b3e5fc",
+            "#4fc3f7",
+            "#2196f3"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "center-gauge",
+        "x": 1000,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "905e1cf198c13b0b",
+        "type": "ui_gauge",
+        "z": "d2c2695015ae8f08",
+        "name": "Min Battery Level",
+        "group": "levels-group",
+        "order": 2,
+        "width": 4,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Min Battery Level",
+        "label": "%",
+        "format": "{{value | number:1}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ed333b",
+            "#f8e45c",
+            "#26a269"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "center-gauge",
+        "x": 1000,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "be09c7ba67b5e318",
+        "type": "ui_template",
+        "z": "d2c2695015ae8f08",
+        "group": "levels-group",
+        "name": "Levels Styling",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n.levels-group .nr-dashboard-cardcontainer {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 10px;\n}\n.center-gauge {\n  text-align: center;\n  margin: 0 auto;\n}\n.center-gauge .value {\n  text-align: center;\n}\n.center-gauge .title {\n  text-align: center;\n}\n</style>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1200,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0f70403369497056",
+        "type": "ui_gauge",
+        "z": "d2c2695015ae8f08",
+        "name": "Irrigation Count",
+        "group": "status-group",
+        "order": 3,
+        "width": 6,
+        "height": 3,
+        "gtype": "donut",
+        "title": "Irrigation Count",
+        "label": "cycles",
+        "format": "{{value | number:0}}",
+        "min": 0,
+        "max": 100,
+        "colors": [
+            "#4caf50",
+            "#8bc34a",
+            "#c8e6c9"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1000,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "cfdaa17f2a91b208",
+        "type": "ui_template",
+        "z": "d2c2695015ae8f08",
+        "group": "sensors-group",
+        "name": "Last Update Display",
+        "order": 1,
+        "width": 6,
+        "height": 2,
+        "format": "<div class=\"status-display update\">\n  <div class=\"status-label\">Last Update</div>\n  <div class=\"status-content\">\n    <span class=\"timestamp\">{{msg.payload.timestamp}}</span>\n  </div>\n</div>\n\n<style>\n.status-display {\n  background: #2d3748;\n  border-radius: 8px;\n  padding: 15px 20px;\n  margin: 4px;\n  border-left: 4px solid #2196f3;\n  box-sizing: border-box;\n}\n.status-label {\n  color: #a0aec0;\n  font-size: 12px;\n  font-weight: 500;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n  margin-bottom: 6px;\n}\n.status-content {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.timestamp {\n  color: #2196f3;\n  font-size: 16px;\n  font-weight: 600;\n}\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1000,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7b1cc338dea4b611",
+        "type": "function",
+        "z": "d2c2695015ae8f08",
+        "name": "Site selection",
+        "func": "\nif (msg.topic === `drip/${flow.get('selectedSite')}/data`) {\n    return msg;\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 80,
+        "wires": [
+            [
+                "d56a3a4b7dced063"
+            ]
+        ]
+    },
+    {
+        "id": "39def078d03adf0b",
+        "type": "ui_template",
+        "z": "d2c2695015ae8f08",
+        "group": "status-group",
+        "name": "Status Display",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "format": "<div class=\"status-display status\">\n  <div class=\"status-label\">Status</div>\n  <div class=\"status-value\">{{msg.payload.message || 'Waiting for status...'}}</div>\n</div>\n\n<style>\n.status-display {\n  background: #2d3748;\n  border-radius: 8px;\n  padding: 15px 20px;\n  margin: 4px;\n  border-left: 4px solid #4caf50;\n  box-sizing: border-box;\n}\n.status-label {\n  color: #a0aec0;\n  font-size: 12px;\n  font-weight: 500;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n  margin-bottom: 6px;\n}\n.status-value {\n  color: #4caf50;\n  font-size: 16px;\n  font-weight: 500;\n  line-height: 1.4;\n}\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 740,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e2371dd5201ee576",
+        "type": "ui_template",
+        "z": "d2c2695015ae8f08",
+        "group": "status-group",
+        "name": "Uptime Display",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<div class=\"status-display\">\n  <div class=\"status-label\">Uptime</div>\n  <div class=\"status-value\">{{msg.payload.uptime}}</div>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 720,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2c221178086356c4",
+        "type": "ui_template",
+        "z": "d2c2695015ae8f08",
+        "group": "status-group",
+        "name": "Version Display",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "format": "<div class=\"status-display\">\n  <div class=\"status-label\">Version</div>\n  <div class=\"status-value\">{{msg.payload.version || 'N/A'}}</div>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 720,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "732e304f1a42b5d6",
+        "type": "function",
+        "z": "d2c2695015ae8f08",
+        "name": "Site selection",
+        "func": "\nif (msg.topic === `drip/${flow.get('selectedSite')}/error`) {\n    return msg;\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 580,
+        "wires": [
+            [
+                "b52d1cfbb599fb28"
+            ]
+        ]
+    },
+    {
+        "id": "a2226364669b4c10",
+        "type": "function",
+        "z": "d2c2695015ae8f08",
+        "name": "Site selection",
+        "func": "\nif (msg.topic === `drip/${flow.get('selectedSite')}/status`) {\n    return msg;\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 500,
+        "wires": [
+            [
+                "293ee65150c0acbd"
+            ]
+        ]
+    }
+]
