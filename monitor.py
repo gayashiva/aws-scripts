@@ -24,6 +24,7 @@ SITE_CONFIG = {
     'Sakti': {'name': 'Sakti', 'type': 'air', 'active': True},
     'Igoo': {'name': 'Igoo', 'type': 'air', 'active': True},
     'Stakmo': {'name': 'Stakmo', 'type': 'air', 'active': True},
+    'Tuna': {'name': 'Tuna', 'type': 'air', 'active': True},
     'Skuast': {'name': 'Skuast', 'type': 'drip', 'active': True},
     # 'Surya': {'name': 'Surya AIR', 'type': 'air', 'active': True},
     # 'Ayee': {'name': 'Ayee', 'type': 'air', 'active': True},
